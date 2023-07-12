@@ -1,10 +1,15 @@
+<?php
+include 'connect.php';
+$conn = new connect();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Challenge</title>
     <style>
         .input {
             width: 100%;
@@ -23,7 +28,6 @@
         }
 
         .button {
-            /* width: 100%; */
             background-color: #435EBE;
             color: white;
             padding: 8px 20px;
@@ -45,18 +49,18 @@
 
 <body>
     <div class="container">
-        <h2>Balance : 0</h2>
+        <h2>Balance : <?php echo $conn->balance(); ?></h2>
         <div class="bg">
-            <form action="/action_page.php">
+            <form action="action.php" method="post">
                 <label for="action">Action</label>
-                <select name="action" id="action" class="input">
-                    <option>--- Select Action ---</option>
+                <select name="action" id="action" class="input" required>
+                    <option value="">--- Select Action ---</option>
                     <option value="Deposit">Deposit</option>
                     <option value="Withdraw">Withdraw</option>
                 </select>
 
                 <label for="value">Value</label>
-                <input type="text" id="value" name="value" class="input" placeholder="Input value">
+                <input type="number" id="value" name="value" class="input" placeholder="Input value" required>
 
                 <input type="submit" value="Submit" class="button">
             </form>
