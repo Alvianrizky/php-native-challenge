@@ -11,6 +11,10 @@ $conn = new connect();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Challenge</title>
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
         .input {
             width: 100%;
             padding: 6px 10px;
@@ -44,6 +48,33 @@ $conn = new connect();
         .container {
             margin: 20px 50px;
         }
+
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table td,
+        .table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        .table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #435EBE;
+            color: white;
+        }
     </style>
 </head>
 
@@ -66,6 +97,27 @@ $conn = new connect();
             </form>
 
         </div>
+
+        <?php if ($conn->getHistory()) : ?>
+            <table class="table">
+                <tr>
+                    <th>Time</th>
+                    <th>Type</th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                    <th>Balance</th>
+                </tr>
+                <?php foreach ($conn->getHistory() as $value) : ?>
+                    <tr>
+                        <td><?php echo $value['time']; ?></td>
+                        <td><?php echo $value['type']; ?></td>
+                        <td><?php echo $value['debit'] == 0 ? '' : $value['debit']; ?></td>
+                        <td><?php echo $value['credit'] == 0 ? '' : $value['credit']; ?></td>
+                        <td><?php echo $value['balance']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php endif; ?>
     </div>
 </body>
 
